@@ -4,15 +4,30 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
 
-// https://vite.dev/config/
+// 👇 新增：自动引入插件
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+
 export default defineConfig({
   plugins: [
     vue(),
     vueDevTools(),
+
+    // 👇 自动引入 Composition API & Element Plus 组件
+    AutoImport({
+      resolvers: [ElementPlusResolver()],
+      dts: 'src/auto-imports.d.ts', // 可选，自动生成类型定义文件
+    }),
+
+    Components({
+      resolvers: [ElementPlusResolver()],
+      dts: 'src/components.d.ts', // 可选，自动生成类型定义文件
+    }),
   ],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
 })

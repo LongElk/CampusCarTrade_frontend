@@ -19,6 +19,9 @@
   --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
   --vt-c-text-dark-1: var(--vt-c-white);
   --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
+
+  --vt-c-primary: #1abc9c; /* 新增主色调：蓝绿色 */
+  --vt-c-accent: #2980b9; /* 新增强调色：深蓝 */
 }
 
 /* semantic color variables for this project */
@@ -67,6 +70,8 @@ body {
     background-color 0.5s;
   line-height: 1.6;
   font-family:
+    'PingFang SC',
+    'Microsoft YaHei',
     Inter,
     -apple-system,
     BlinkMacSystemFont,
@@ -79,8 +84,52 @@ body {
     'Droid Sans',
     'Helvetica Neue',
     sans-serif;
-  font-size: 15px;
+  font-size: 16px;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* 新增按钮样式 */
+.button {
+  background: var(--vt-c-primary);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5em 1.2em;
+  cursor: pointer;
+  transition: background 0.3s;
+  font-size: 1em;
+}
+.button:hover {
+  background: var(--vt-c-accent);
+}
+
+/* 新增卡片样式 */
+.card {
+  background: var(--color-background-soft);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.05);
+  padding: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+/* 表单输入样式 */
+input,
+select,
+textarea {
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  padding: 0.5em;
+  font-size: 1em;
+  margin-bottom: 1em;
+  width: 100%;
+  box-sizing: border-box;
+}
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--vt-c-primary);
+  outline: none;
 }
