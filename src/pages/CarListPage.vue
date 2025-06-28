@@ -13,7 +13,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+import { getCarList } from '../api/car'
 
 interface Car {
   brand: string
@@ -22,11 +23,11 @@ interface Car {
   price: number
 }
 
-const carList = ref<Car[]>([
-  { brand: 'Toyota', model: 'Corolla', year: 2018, price: 35000 },
-  { brand: 'Honda', model: 'Civic', year: 2020, price: 42000 },
-  { brand: 'Volkswagen', model: 'Polo', year: 2017, price: 28000 },
-])
+const carList = ref<Car[]>([])
+
+onMounted(async () => {
+  carList.value = await getCarList()
+})
 </script>
 
 <style scoped>
