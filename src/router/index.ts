@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
-import HomePage from '../pages/HomePage.vue'
-import LoginPage from '../pages/LoginPage.vue'
+import HomePage from '@/pages/HomePage.vue'
+import AuthPage from '@/pages/AuthPage.vue'
 
 const routes: RouteRecordRaw[] = [
-  { path: '/login', name: 'Login', component: LoginPage },
+  { path: '/login', name: 'Login', component: AuthPage },
   { path: '/', name: 'Home', component: HomePage, meta: { requiresAuth: true } },
   { path: '/list', component: () => import('@/pages/CarListPage.vue') },
   { path: '/post', component: () => import('@/pages/PostCarPage.vue') },
@@ -19,10 +19,10 @@ const router = createRouter({
 // 路由守卫
 router.beforeEach((to, from, next) => {
   const token = localStorage.getItem('token')
-  if (to.meta.requiresAuth && !token) {
-    next({ path: '/login' })
-  } else if (to.path === '/login' && token) {
+  if (to.path === '/login' && token) {
     next({ path: '/' })
+  } else if (to.meta.requiresAuth && !token) {
+    next({ path: '/login' })
   } else {
     next()
   }

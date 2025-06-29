@@ -1,15 +1,157 @@
 import api from './base'
 
-export interface Car {
-  brand: string
-  model: string
-  year: number
+// 车辆列表项
+export interface CarListItem {
+  id: number
+  title: string
+  type: string
   price: number
+  status: string
+  location: string
+  publishTime: string
+  imageUrl: string
 }
 
-export async function getCarList(): Promise<Car[]> {
-  const res = await api.get('/api/cars')
+// 车辆列表响应
+export interface CarListResponse {
+  code: number
+  message: string
+  data: {
+    total: number
+    page: number
+    size: number
+    items: CarListItem[]
+  }
+}
+
+// 发布车辆参数
+export interface PublishCarParams {
+  title: string
+  type: string
+  description: string
+  price: number
+  mileage: number
+  location: string
+}
+
+// 发布车辆响应
+export interface PublishCarResponse {
+  code: number
+  message: string
+  data: {
+    vehicleId: number
+  }
+}
+
+// 上传车辆图片响应
+export interface UploadImageResponse {
+  code: number
+  message: string
+  data: {
+    imageId: number
+    url: string
+  }
+}
+
+// 车辆详情
+export interface CarDetail {
+  id: number
+  seller: {
+    id: number
+    name: string
+    phone: string
+  }
+  title: string
+  type: string
+  description: string
+  price: number
+  status: string
+  mileage: number
+  location: string
+  publishTime: string
+  images: {
+    id: number
+    url: string
+    sortOrder: number
+  }[]
+  analytics: {
+    viewCount: number
+    favoriteCount: number
+  }
+}
+
+// 车辆详情响应
+export interface CarDetailResponse {
+  code: number
+  message: string
+  data: CarDetail
+}
+
+// 发布车辆
+export async function publishCar(
+  params: PublishCarParams,
+  token: string,
+): Promise<PublishCarResponse> {
+  const res = await api.post('/vehicles', params, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
   return res.data
 }
 
-// 可扩展：发布车辆、删除车辆等
+// 上传车辆图片
+export async function uploadCarImage(
+  vehicleId: number,
+  image: File,
+  sortOrder: number,
+  token: string,
+): Promise<UploadImageResponse> {
+  const formData = new FormData()
+  formData.append('image', image)
+  formData.append('sortOrder', sortOrder.toString())
+  const res = await api.post(`/vehicles/${vehicleId}/images`, formData, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'multipart/form-data',
+    },
+  })
+  return res.data
+}
+
+// 获取车辆列表
+export async function getCarList(
+  params: {
+    page?: number
+    size?: number
+    type?: string
+    status?: string
+  } = {},
+): Promise<CarListResponse> {
+  const res = await api.get('/vehicles', { params })
+  return res.data
+}
+
+// 获取车辆详情
+export async function getCarDetail(vehicleId: number): Promise<CarDetailResponse> {
+  const res = await api.get(`/vehicles/${vehicleId}`)
+  return res.data
+}
+
+// 更新车辆状态
+export async function updateCarStatus(
+  vehicleId: number,
+  status: string,
+  token: string,
+): Promise<{ code: number; message: string }> {
+  const res = await api.put(
+    `/vehicles/${vehicleId}/status`,
+    { status },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  )
+  return res.data
+}

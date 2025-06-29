@@ -1,17 +1,72 @@
 import api from './base'
 
-export async function getOrderList() {
-  const res = await api.get('/api/orders')
-  return res.data
+// 订单车辆信息
+export interface OrderVehicle {
+  id: number
+  title: string
+  imageUrl: string
 }
 
-export interface OrderData {
-  productId: string
-  quantity: number
+// 订单信息
+export interface Order {
+  id: number
+  vehicle: OrderVehicle
+  buyerName: string
+  sellerName: string
+  price: number
+  status: string
+  createdTime: string
+}
+
+// 创建订单参数
+export interface CreateOrderParams {
+  vehicleId: number
   price: number
 }
 
-export async function createOrder(orderData: OrderData) {
-  const res = await api.post('/api/orders', orderData)
+// 创建订单响应
+export interface CreateOrderResponse {
+  code: number
+  message: string
+  data: {
+    orderId: number
+    status: string
+  }
+}
+
+// 订单列表响应
+export interface OrderListResponse {
+  code: number
+  message: string
+  data: {
+    total: number
+    items: Order[]
+  }
+}
+
+// 创建订单
+export async function createOrder(
+  params: CreateOrderParams,
+  token: string,
+): Promise<CreateOrderResponse> {
+  const res = await api.post('/orders', params, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+  return res.data
+}
+
+// 获取订单列表
+export async function getOrderList(
+  params: { role?: string; status?: string; page?: number; size?: number } = {},
+  token: string,
+): Promise<OrderListResponse> {
+  const res = await api.get('/orders', {
+    params,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
   return res.data
 }

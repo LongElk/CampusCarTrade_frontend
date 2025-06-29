@@ -1,0 +1,81 @@
+import { MockMethod } from 'vite-plugin-mock'
+
+export default [
+  {
+    url: '/vehicles',
+    method: 'get',
+    response: ({ query }) => {
+      return {
+        code: 200,
+        message: '获取成功',
+        data: {
+          total: 1,
+          page: Number(query.page) || 1,
+          size: Number(query.size) || 10,
+          items: [
+            {
+              id: 1,
+              title: '九成新山地自行车',
+              type: 'BICYCLE',
+              price: 300,
+              status: 'AVAILABLE',
+              location: 'XX校区',
+              publishTime: '2023-06-29 10:00:00',
+              imageUrl: 'https://oss.example.com/images/thumb_xxx.jpg',
+            },
+          ],
+        },
+      }
+    },
+  },
+  {
+    url: '/vehicles',
+    method: 'post',
+    response: () => {
+      return {
+        code: 200,
+        message: '发布成功',
+        data: {
+          vehicleId: 2,
+        },
+      }
+    },
+  },
+  {
+    url: '/vehicles/1',
+    method: 'get',
+    response: () => {
+      return {
+        code: 200,
+        message: '获取成功',
+        data: {
+          id: 1,
+          seller: {
+            id: 1,
+            name: '张三',
+            phone: '138****8000',
+          },
+          title: '九成新山地自行车',
+          type: 'BICYCLE',
+          description: '买了一年，骑行次数不多，车况良好',
+          price: 300,
+          status: 'AVAILABLE',
+          mileage: 500,
+          location: 'XX校区宿舍楼下',
+          publishTime: '2023-06-29 10:00:00',
+          images: [
+            {
+              id: 1,
+              url: 'https://oss.example.com/images/xxx1.jpg',
+              sortOrder: 1,
+            },
+          ],
+          analytics: {
+            viewCount: 120,
+            favoriteCount: 5,
+          },
+        },
+      }
+    },
+  },
+] as MockMethod[]
