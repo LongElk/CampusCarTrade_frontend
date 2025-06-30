@@ -1,9 +1,9 @@
 @import './base.css';
 
 #app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  width: 100vw;
+  max-width: none;
+  margin: 0;
   font-weight: normal;
   background: var(--color-background-soft);
   min-height: 100vh;
@@ -21,7 +21,7 @@
   text-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
 }
 
-/* 导航栏样式 */
+/* 删除导航栏样式
 .navbar {
   display: flex;
   gap: 2rem;
@@ -42,6 +42,7 @@
   background: var(--vt-c-primary);
   color: #fff;
 }
+*/
 
 a,
 .green {
@@ -58,7 +59,7 @@ a,
   }
 }
 
-@media (min-width: 1024px) {
+/* @media (min-width: 1024px) {
   body {
     display: flex;
     place-items: center;
@@ -70,7 +71,7 @@ a,
     grid-template-columns: 1fr 1fr;
     padding: 0 2rem;
   }
-}
+} */
 
 /* 新增全局卡片阴影和圆角 */
 .card,

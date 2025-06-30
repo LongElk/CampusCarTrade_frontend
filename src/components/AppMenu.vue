@@ -45,15 +45,16 @@ const activeMenu = computed(() => route.path)
 
 <style scoped>
 .el-menu-horizontal-demo {
-  width: 100vw;
-  min-width: 900px;
-  border-radius: 12px;
+  width: 100%;
+  min-width: 0;
+  border-radius: 0;
   box-shadow: 0 2px 12px rgba(44, 62, 80, 0.08);
   margin-bottom: 24px;
-  padding: 0 32px;
+  padding: 0 0;
   background: #fff;
   border: none;
   height: 60px;
+  display: flex;
 }
 
 .el-menu--horizontal>.el-menu-item:nth-child(3) {
@@ -94,10 +95,19 @@ const activeMenu = computed(() => route.path)
   padding: 0 28px;
   height: 60px;
   line-height: 60px;
-  border-radius: 8px;
+  border-radius: 0;
   transition: background 0.2s, color 0.2s;
   display: flex;
   align-items: center;
+  /* 让第一个和最后一个菜单项顶到两边 */
+}
+
+.el-menu-horizontal-demo .el-menu-item:first-child {
+  margin-left: 0;
+}
+
+.el-menu-horizontal-demo .el-menu-item:last-child {
+  margin-right: 0;
 }
 
 .el-menu-horizontal-demo .el-menu-item.is-active,
