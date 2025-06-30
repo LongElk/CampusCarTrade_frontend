@@ -55,8 +55,8 @@ const fetchDetail = async () => {
   try {
     const res = await getCarDetail(Number(route.params.id))
     car.value = res.data
-  } catch (e: any) {
-    error.value = e?.message || '加载失败'
+  } catch (e) {
+    error.value = (e instanceof Error ? e.message : '加载失败')
   }
 }
 
@@ -64,10 +64,10 @@ const onBuy = async () => {
   if (!car.value) return
   buying.value = true
   try {
-    await createOrder({ vehicleId: car.value.id })
+    await createOrder({ vehicleId: car.value.id, price: car.value.price })
     orderDialog.value = true
-  } catch (e: any) {
-    error.value = e?.message || '下单失败'
+  } catch (e) {
+    error.value = (e instanceof Error ? e.message : '下单失败')
   } finally {
     buying.value = false
   }
