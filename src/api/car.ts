@@ -88,15 +88,8 @@ export interface CarDetailResponse {
 }
 
 // 发布车辆
-export async function publishCar(
-  params: PublishCarParams,
-  token: string,
-): Promise<PublishCarResponse> {
-  const res = await api.post('/vehicles', params, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  })
+export async function publishCar(params: PublishCarParams): Promise<PublishCarResponse> {
+  const res = await api.post('/vehicles', params)
   return res.data
 }
 
@@ -105,14 +98,12 @@ export async function uploadCarImage(
   vehicleId: number,
   image: File,
   sortOrder: number,
-  token: string,
 ): Promise<UploadImageResponse> {
   const formData = new FormData()
   formData.append('image', image)
   formData.append('sortOrder', sortOrder.toString())
   const res = await api.post(`/vehicles/${vehicleId}/images`, formData, {
     headers: {
-      Authorization: `Bearer ${token}`,
       'Content-Type': 'multipart/form-data',
     },
   })
@@ -126,6 +117,7 @@ export async function getCarList(
     size?: number
     type?: string
     status?: string
+    keyword?: string // 新增
   } = {},
 ): Promise<CarListResponse> {
   const res = await api.get('/vehicles', { params })
@@ -142,16 +134,7 @@ export async function getCarDetail(vehicleId: number): Promise<CarDetailResponse
 export async function updateCarStatus(
   vehicleId: number,
   status: string,
-  token: string,
 ): Promise<{ code: number; message: string }> {
-  const res = await api.put(
-    `/vehicles/${vehicleId}/status`,
-    { status },
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    },
-  )
+  const res = await api.put(`/vehicles/${vehicleId}/status`, { status })
   return res.data
 }

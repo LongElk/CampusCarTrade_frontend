@@ -45,28 +45,17 @@ export interface OrderListResponse {
 }
 
 // 创建订单
-export async function createOrder(
-  params: CreateOrderParams,
-  token: string,
-): Promise<CreateOrderResponse> {
-  const res = await api.post('/orders', params, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  })
+export async function createOrder(params: CreateOrderParams): Promise<CreateOrderResponse> {
+  const res = await api.post('/orders', params)
   return res.data
 }
 
 // 获取订单列表
 export async function getOrderList(
   params: { role?: string; status?: string; page?: number; size?: number } = {},
-  token: string,
 ): Promise<OrderListResponse> {
   const res = await api.get('/orders', {
     params,
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
   })
   return res.data
 }
