@@ -30,7 +30,8 @@ export default [
               vehicle: {
                 id: 1,
                 title: '九成新山地自行车',
-                imageUrl: 'https://oss.example.com/images/thumb_xxx.jpg',
+                imageUrl:
+                  'https://youpin.img898.com/csgo/template/0c73847433c64b83afc222786d464c76.png?x-oss-process=image/format,webp/quality,Q_100',
               },
               buyerName: '李四',
               sellerName: '张三',

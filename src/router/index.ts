@@ -6,12 +6,18 @@ import AuthPage from '@/pages/AuthPage.vue'
 const routes: RouteRecordRaw[] = [
   { path: '/login', name: 'Login', component: AuthPage },
   { path: '/', name: 'Home', component: HomePage, meta: { requiresAuth: true } },
-  { path: '/list', component: () => import('@/pages/CarListPage.vue') },
-  { path: '/post', component: () => import('@/pages/PostCarPage.vue') },
+  { path: '/list', name: 'CarList', component: () => import('@/pages/CarListPage.vue') },
+  { path: '/post', name: 'PostCar', component: () => import('@/pages/PostCarPage.vue') },
   {
     path: '/orders',
     name: 'OrderPage',
     component: () => import('../pages/OrderPage.vue'),
+  },
+  {
+    path: '/car/:id',
+    name: 'CarDetail',
+    component: () => import('@/pages/CarDetailPage.vue'),
+    props: true,
   },
   { path: '/:pathMatch(.*)*', component: () => import('@/pages/NotFoundPage.vue') },
 ]
