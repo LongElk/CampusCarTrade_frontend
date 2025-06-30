@@ -32,6 +32,7 @@ export interface PublishCarParams {
   price: number
   mileage: number
   location: string
+  imageUrls: string[] // 新增图片url数组
 }
 
 // 发布车辆响应
@@ -93,16 +94,12 @@ export async function publishCar(params: PublishCarParams): Promise<PublishCarRe
   return res.data
 }
 
-// 上传车辆图片
-export async function uploadCarImage(
-  vehicleId: number,
-  image: File,
-  sortOrder: number,
-): Promise<UploadImageResponse> {
+// 上传车辆图片，返回图片url
+export async function uploadCarImage(image: File, sortOrder: number): Promise<UploadImageResponse> {
   const formData = new FormData()
   formData.append('image', image)
   formData.append('sortOrder', sortOrder.toString())
-  const res = await api.post(`/vehicles/${vehicleId}/images`, formData, {
+  const res = await api.post(`/vehicles/images`, formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },

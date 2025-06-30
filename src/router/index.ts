@@ -8,6 +8,11 @@ const routes: RouteRecordRaw[] = [
   { path: '/', name: 'Home', component: HomePage, meta: { requiresAuth: true } },
   { path: '/list', component: () => import('@/pages/CarListPage.vue') },
   { path: '/post', component: () => import('@/pages/PostCarPage.vue') },
+  {
+    path: '/orders',
+    name: 'OrderPage',
+    component: () => import('../pages/OrderPage.vue'),
+  },
   { path: '/:pathMatch(.*)*', component: () => import('@/pages/NotFoundPage.vue') },
 ]
 

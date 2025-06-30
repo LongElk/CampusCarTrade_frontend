@@ -1,7 +1,7 @@
 <template>
   <el-menu :default-active="activeMenu" class="el-menu-horizontal-demo" mode="horizontal" router background-color="#fff"
     text-color="#333" active-text-color="#42b983">
-    <el-menu-item index="/home">
+    <el-menu-item index="/">
       <el-icon>
         <House />
       </el-icon>
@@ -20,6 +20,13 @@
         <Edit />
       </el-icon>
       <span>发布车辆</span>
+    </el-menu-item>
+
+    <el-menu-item index="/orders">
+      <el-icon>
+        <List />
+      </el-icon>
+      <span>订单</span>
     </el-menu-item>
 
     <el-menu-item disabled class="menu-avatar-item">
