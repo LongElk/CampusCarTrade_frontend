@@ -30,24 +30,32 @@
     </el-menu-item>
 
     <el-menu-item disabled class="menu-avatar-item">
-      <el-avatar class="menu-avatar" src="https://api.dicebear.com/7.x/miniavs/svg?seed=1" />
-    </el-menu-item>
-    <el-menu-item disabled class="menu-setting-item">
-      <el-icon class="menu-setting">
-        <Setting />
-      </el-icon>
+      <el-popconfirm
+        title="确定要退出登录吗？"
+        @confirm="onLogout"
+      >
+        <template #reference>
+          <el-avatar class="menu-avatar" src="https://api.dicebear.com/7.x/miniavs/svg?seed=1" style="cursor:pointer;" />
+        </template>
+      </el-popconfirm>
     </el-menu-item>
   </el-menu>
 </template>
 
 <script lang="ts" setup>
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { computed } from 'vue'
-import { House, List, Edit, Setting } from '@element-plus/icons-vue'
+import { House, List, Edit } from '@element-plus/icons-vue'
 import { ElAvatar } from 'element-plus'
 
 const route = useRoute()
+const router = useRouter()
 const activeMenu = computed(() => route.path)
+
+const onLogout = () => {
+  localStorage.removeItem('token')
+  router.replace('/login')
+}
 </script>
 
 <style scoped>
@@ -68,8 +76,7 @@ const activeMenu = computed(() => route.path)
   margin-right: auto;
 }
 
-.menu-avatar-item,
-.menu-setting-item {
+.menu-avatar-item {
   padding: 0 12px !important;
   cursor: default;
   background: transparent !important;
@@ -83,17 +90,6 @@ const activeMenu = computed(() => route.path)
 
 .menu-avatar:hover {
   border-color: #42b983;
-}
-
-.menu-setting {
-  font-size: 1.5em;
-  color: #888;
-  cursor: pointer;
-  transition: color 0.2s;
-}
-
-.menu-setting:hover {
-  color: #42b983;
 }
 
 .el-menu-horizontal-demo .el-menu-item {
@@ -130,3 +126,4 @@ const activeMenu = computed(() => route.path)
   align-items: center;
 }
 </style>
+
