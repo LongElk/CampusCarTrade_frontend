@@ -125,7 +125,22 @@ export default [
         code: 200,
         message: '发布成功',
         data: {
-          vehicleId: 2,
+          vehicleId: Math.floor(Math.random() * 10000) + 1,
+        },
+      }
+    },
+  },
+  // 模拟上传车辆图片接口
+  {
+    url: '/vehicles/images',
+    method: 'post',
+    response: () => {
+      return {
+        code: 200,
+        message: '上传成功',
+        data: {
+          imageId: Math.floor(Math.random() * 10000) + 1,
+          url: 'https://oss.example.com/images/mock_' + Date.now() + '.jpg',
         },
       }
     },
