@@ -28,16 +28,9 @@
       </el-icon>
       <span>订单</span>
     </el-menu-item>
-
-    <el-menu-item disabled class="menu-avatar-item">
-      <el-popconfirm
-        title="确定要退出登录吗？"
-        @confirm="onLogout"
-      >
-        <template #reference>
-          <el-avatar class="menu-avatar" src="https://api.dicebear.com/7.x/miniavs/svg?seed=1" style="cursor:pointer;" />
-        </template>
-      </el-popconfirm>
+    <el-menu-item class="menu-avatar-item" @click="onLogout">
+      <el-avatar class="menu-avatar" src="https://api.dicebear.com/7.x/miniavs/svg?seed=1" style="cursor:pointer;" />
+      <span class="logout-text">退出登录</span>
     </el-menu-item>
   </el-menu>
 </template>
@@ -78,18 +71,32 @@ const onLogout = () => {
 
 .menu-avatar-item {
   padding: 0 12px !important;
-  cursor: default;
+  cursor: pointer;
   background: transparent !important;
+  display: flex;
+  align-items: center;
 }
 
 .menu-avatar {
   cursor: pointer;
   border: 2px solid #e0e0e0;
   transition: border 0.2s;
+  margin-right: 8px;
 }
 
 .menu-avatar:hover {
   border-color: #42b983;
+}
+
+.logout-text {
+  font-size: 1rem;
+  color: #888;
+  margin-left: 2px;
+  transition: color 0.2s;
+}
+
+.menu-avatar-item:hover .logout-text {
+  color: #42b983;
 }
 
 .el-menu-horizontal-demo .el-menu-item {
