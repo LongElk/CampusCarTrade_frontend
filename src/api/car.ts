@@ -4,11 +4,7 @@ import api from './base'
 export interface CarListItem {
   id: number
   title: string
-  type: string
   price: number
-  status: string
-  location: string
-  publishTime: string
   imageUrl: string
 }
 
@@ -113,8 +109,9 @@ export async function getCarList(
     page?: number
     size?: number
     type?: string
-    status?: string
-    keyword?: string // 新增
+    keyword?: string
+    minPrice?: number
+    maxPrice?: number
   } = {},
 ): Promise<CarListResponse> {
   const res = await api.get('/vehicles', { params })

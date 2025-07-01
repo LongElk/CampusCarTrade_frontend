@@ -5,114 +5,95 @@ export default [
     url: '/vehicles',
     method: 'get',
     response: ({ query }) => {
+      // mock数据
+      const allItems = [
+        {
+          id: 1,
+          title: '九成新山地自行车',
+          type: 'BICYCLE',
+          price: 300,
+          status: 'AVAILABLE',
+          location: 'XX校区',
+          publishTime: '2023-06-29 10:00:00',
+          imageUrl:
+            'https://youpin.img898.com/csgo/template/d8b8bb7aee124ea9ae2b8281ef88cacd.png?x-oss-process=image/format,webp/quality,Q_100',
+        },
+        {
+          id: 2,
+          title: '八成新电动车',
+          type: 'ELECTRIC',
+          price: 1200,
+          status: 'AVAILABLE',
+          location: 'YY校区',
+          publishTime: '2023-06-28 09:00:00',
+          imageUrl:
+            'https://youpin.img898.com/csgo/template/a1a6fbbb333549a8b068d58580f6c337.png?x-oss-process=image/format,webp/quality,Q_100',
+        },
+        {
+          id: 3,
+          title: '七成新山地自行车',
+          type: 'BICYCLE',
+          price: 200,
+          status: 'AVAILABLE',
+          location: 'ZZ校区',
+          publishTime: '2023-06-27 08:00:00',
+          imageUrl:
+            'https://youpin.img898.com/csgo/template/b939c38553c444678e7d16662e622dde.png?x-oss-process=image/format,webp/quality,Q_100',
+        },
+        {
+          id: 4,
+          title: '九成新电动车',
+          type: 'ELECTRIC',
+          price: 1500,
+          status: 'AVAILABLE',
+          location: 'XX校区',
+          publishTime: '2023-06-26 10:00:00',
+          imageUrl:
+            'https://youpin.img898.com/csgo/template/9e5ddbb751e2420fbe0d45eab504dbe0.png?x-oss-process=image/format,webp/quality,Q_100',
+        },
+        {
+          id: 5,
+          title: '六成新山地自行车',
+          type: 'BICYCLE',
+          price: 100,
+          status: 'AVAILABLE',
+          location: 'YY校区',
+          publishTime: '2023-06-25 10:00:00',
+          imageUrl:
+            'https://youpin.img898.com/csgo/template/d8b8bb7aee124ea9ae2b8281ef88cacd.png?x-oss-process=image/format,webp/quality,Q_100',
+        },
+      ]
+
+      // 筛选逻辑
+      let filtered = allItems
+      if (query.type) {
+        filtered = filtered.filter((item) => item.type === query.type)
+      }
+      if (query.minPrice) {
+        filtered = filtered.filter((item) => item.price >= Number(query.minPrice))
+      }
+      if (query.maxPrice) {
+        filtered = filtered.filter((item) => item.price <= Number(query.maxPrice))
+      }
+      if (query.keyword) {
+        filtered = filtered.filter((item) => item.title.includes(query.keyword))
+      }
+
+      // 分页
+      const page = Number(query.page) || 1
+      const size = Number(query.size) || 10
+      const start = (page - 1) * size
+      const end = start + size
+      const items = filtered.slice(start, end)
+
       return {
         code: 200,
         message: '获取成功',
         data: {
-          total: 1,
-          page: Number(query.page) || 1,
-          size: Number(query.size) || 10,
-          items: [
-            {
-              id: 1,
-              title: '九成新山地自行车',
-              type: 'BICYCLE',
-              price: 300,
-              status: 'AVAILABLE',
-              location: 'XX校区',
-              publishTime: '2023-06-29 10:00:00',
-              imageUrl:
-                'https://youpin.img898.com/csgo/template/d8b8bb7aee124ea9ae2b8281ef88cacd.png?x-oss-process=image/format,webp/quality,Q_100',
-            },
-            {
-              id: 1,
-              title: '九成新山地自行车',
-              type: 'BICYCLE',
-              price: 300,
-              status: 'AVAILABLE',
-              location: 'XX校区',
-              publishTime: '2023-06-29 10:00:00',
-              imageUrl:
-                'https://youpin.img898.com/csgo/template/a1a6fbbb333549a8b068d58580f6c337.png?x-oss-process=image/format,webp/quality,Q_100',
-            },
-            {
-              id: 1,
-              title: '九成新山地自行车',
-              type: 'BICYCLE',
-              price: 300,
-              status: 'AVAILABLE',
-              location: 'XX校区',
-              publishTime: '2023-06-29 10:00:00',
-              imageUrl:
-                'https://youpin.img898.com/csgo/template/d8b8bb7aee124ea9ae2b8281ef88cacd.png?x-oss-process=image/format,webp/quality,Q_100',
-            },
-            {
-              id: 1,
-              title: '九成新山地自行车',
-              type: 'BICYCLE',
-              price: 300,
-              status: 'AVAILABLE',
-              location: 'XX校区',
-              publishTime: '2023-06-29 10:00:00',
-              imageUrl:
-                'https://youpin.img898.com/csgo/template/d8b8bb7aee124ea9ae2b8281ef88cacd.png?x-oss-process=image/format,webp/quality,Q_100',
-            },
-            {
-              id: 1,
-              title: '九成新山地自行车',
-              type: 'BICYCLE',
-              price: 300,
-              status: 'AVAILABLE',
-              location: 'XX校区',
-              publishTime: '2023-06-29 10:00:00',
-              imageUrl:
-                'https://youpin.img898.com/csgo/template/d8b8bb7aee124ea9ae2b8281ef88cacd.png?x-oss-process=image/format,webp/quality,Q_100',
-            },
-            {
-              id: 1,
-              title: '九成新山地自行车',
-              type: 'BICYCLE',
-              price: 300,
-              status: 'AVAILABLE',
-              location: 'XX校区',
-              publishTime: '2023-06-29 10:00:00',
-              imageUrl:
-                'https://youpin.img898.com/csgo/template/d8b8bb7aee124ea9ae2b8281ef88cacd.png?x-oss-process=image/format,webp/quality,Q_100',
-            },
-            {
-              id: 1,
-              title: '九成新山地自行车',
-              type: 'BICYCLE',
-              price: 300,
-              status: 'AVAILABLE',
-              location: 'XX校区',
-              publishTime: '2023-06-29 10:00:00',
-              imageUrl:
-                'https://youpin.img898.com/csgo/template/d8b8bb7aee124ea9ae2b8281ef88cacd.png?x-oss-process=image/format,webp/quality,Q_100',
-            },
-            {
-              id: 1,
-              title: '九成新山地自行车',
-              type: 'BICYCLE',
-              price: 300,
-              status: 'AVAILABLE',
-              location: 'XX校区',
-              publishTime: '2023-06-29 10:00:00',
-              imageUrl:
-                'https://youpin.img898.com/csgo/template/b939c38553c444678e7d16662e622dde.png?x-oss-process=image/format,webp/quality,Q_100',
-            },
-            {
-              id: 1,
-              title: '九成新山地自行车',
-              type: 'BICYCLE',
-              price: 300,
-              status: 'AVAILABLE',
-              location: 'XX校区',
-              publishTime: '2023-06-29 10:00:00',
-              imageUrl:
-                'https://youpin.img898.com/csgo/template/9e5ddbb751e2420fbe0d45eab504dbe0.png?x-oss-process=image/format,webp/quality,Q_100',
-            },
-          ],
+          total: filtered.length,
+          page,
+          size,
+          items,
         },
       }
     },

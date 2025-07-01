@@ -9,6 +9,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     AppMenu: typeof import('./components/AppMenu.vue')['default']
+    CarFilterBar: typeof import('./components/carlist/CarFilterBar.vue')['default']
     CarList: typeof import('./components/carlist/CarList.vue')['default']
     CarListPanel: typeof import('./components/carlist/CarListPanel.vue')['default']
     CarPagination: typeof import('./components/carlist/CarPagination.vue')['default']
