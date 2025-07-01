@@ -24,8 +24,7 @@ import { getBuyerOrderList, getSellerOrderList } from '../api/order'
 import type { Order } from '../api/order'
 
 const props = defineProps<{
-  type: 'sell' | 'buy',
-  userId: number
+  type: 'sell' | 'buy'
 }>()
 
 const orders = ref<Order[]>([])
@@ -33,14 +32,14 @@ const orders = ref<Order[]>([])
 const fetchOrders = async () => {
   let res
   if (props.type === 'sell') {
-    res = await getSellerOrderList(props.userId)
+    res = await getSellerOrderList()
   } else {
-    res = await getBuyerOrderList(props.userId)
+    res = await getBuyerOrderList()
   }
   orders.value = res.data.items
 }
 
 watch(() => props.type, fetchOrders, { immediate: true })
-watch(() => props.userId, fetchOrders)
 onMounted(fetchOrders)
 </script>
+

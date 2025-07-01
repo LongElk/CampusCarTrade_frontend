@@ -50,24 +50,23 @@ export async function createOrder(params: CreateOrderParams): Promise<CreateOrde
   return res.data
 }
 
-// 根据买家ID获取订单列表
+// 根据买家身份获取订单列表（不再需要 buyerId）
 export async function getBuyerOrderList(
-  buyerId: number,
   params: { status?: string; page?: number; size?: number } = {},
 ): Promise<OrderListResponse> {
-  const res = await api.get(`/orders/buyer/${buyerId}`, {
+  const res = await api.get('/orders/buyer', {
     params,
   })
   return res.data
 }
 
-// 根据卖家ID获取订单列表
+// 根据卖家身份获取订单列表（不再需要 sellerId）
 export async function getSellerOrderList(
-  sellerId: number,
   params: { status?: string; page?: number; size?: number } = {},
 ): Promise<OrderListResponse> {
-  const res = await api.get(`/orders/seller/${sellerId}`, {
+  const res = await api.get('/orders/seller', {
     params,
   })
   return res.data
 }
+
