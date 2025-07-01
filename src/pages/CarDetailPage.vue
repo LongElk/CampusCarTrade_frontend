@@ -21,7 +21,7 @@
           <div>发布时间：{{ car.publishTime }}</div>
           <div>卖家：{{ car.sellerVO.name }} ({{ car.sellerVO.phone }})</div>
           <div class="desc">描述：{{ car.description }}</div>
-          <el-button type="primary" @click="onBuy" :loading="buying" :disabled="car.status !== '在售'">购买</el-button>
+          <el-button type="primary" @click="onBuy" :loading="buying">购买</el-button>
         </el-col>
       </el-row>
     </el-card>
