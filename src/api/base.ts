@@ -20,7 +20,17 @@ api.interceptors.response.use(
     let message = '请求失败'
     if (error.response) {
       // 后端有响应
-      message = error.response.data?.message || `服务端错误(${error.response.status})`
+      if (error.response.status === 401) {
+        // token无效或过期，自动处理
+        localStorage.removeItem('token')
+        message = error.response.data?.message || '登录已过期，请重新登录'
+        // 可选：跳转到登录页
+        if (window.location.pathname !== '/login') {
+          window.location.href = '/login'
+        }
+      } else {
+        message = error.response.data?.message || `服务端错误(${error.response.status})`
+      }
     } else if (error.request) {
       // 请求已发出但无响应
       message = '服务器无响应，请检查网络'
