@@ -15,13 +15,26 @@
     <el-table-column prop="createdTime" label="下单时间" />
     <el-table-column prop="buyerName" label="买家" v-if="type === 'sell'" />
     <el-table-column prop="sellerName" label="卖家" v-if="type === 'buy'" />
+    <el-table-column label="操作" width="100">
+      <template #default="{ row }">
+        <el-popconfirm
+          title="确定要删除该订单吗？"
+          @confirm="onDelete(row.id)"
+        >
+          <template #reference>
+            <el-button type="danger" size="small">删除</el-button>
+          </template>
+        </el-popconfirm>
+      </template>
+    </el-table-column>
   </el-table>
 </template>
 
 <script setup lang="ts">
 import { ref, watch, onMounted } from 'vue'
-import { getBuyerOrderList, getSellerOrderList } from '../api/order'
+import { getBuyerOrderList, getSellerOrderList, deleteOrder } from '../api/order'
 import type { Order } from '../api/order'
+import { ElMessage } from 'element-plus'
 
 const props = defineProps<{
   type: 'sell' | 'buy'
@@ -37,6 +50,20 @@ const fetchOrders = async () => {
     res = await getBuyerOrderList()
   }
   orders.value = res.data.items
+}
+
+const onDelete = async (orderId: number) => {
+  try {
+    await deleteOrder(orderId)
+    ElMessage.success('订单已删除')
+    fetchOrders()
+  } catch (e: unknown) {
+    let msg = '删除失败'
+    if (e instanceof Error) {
+      msg = e.message
+    }
+    ElMessage.error(msg)
+  }
 }
 
 watch(() => props.type, fetchOrders, { immediate: true })

@@ -70,3 +70,9 @@ export async function getSellerOrderList(
   return res.data
 }
 
+// 删除订单
+export async function deleteOrder(orderId: number): Promise<{ code: number; message: string }> {
+  const res = await api.delete(`/orders/${orderId}`)
+  return res.data
+}
+
