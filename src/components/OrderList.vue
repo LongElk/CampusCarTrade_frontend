@@ -20,21 +20,27 @@
 
 <script setup lang="ts">
 import { ref, watch, onMounted } from 'vue'
-import { getOrderList } from '../api/order'
+import { getBuyerOrderList, getSellerOrderList } from '../api/order'
 import type { Order } from '../api/order'
 
 const props = defineProps<{
-  type: 'sell' | 'buy'
+  type: 'sell' | 'buy',
+  userId: number
 }>()
 
 const orders = ref<Order[]>([])
 
 const fetchOrders = async () => {
-  const role = props.type === 'sell' ? 'seller' : 'buyer'
-  const res = await getOrderList({ role })
+  let res
+  if (props.type === 'sell') {
+    res = await getSellerOrderList(props.userId)
+  } else {
+    res = await getBuyerOrderList(props.userId)
+  }
   orders.value = res.data.items
 }
 
 watch(() => props.type, fetchOrders, { immediate: true })
+watch(() => props.userId, fetchOrders)
 onMounted(fetchOrders)
 </script>

@@ -5,18 +5,27 @@
       <el-option label="自行车" value="BICYCLE" />
       <el-option label="电动车" value="ELECTRIC" />
     </el-select>
-    <el-input-number v-model="minPrice" :min="0" :max="maxPrice || undefined" placeholder="最低价"
-      style="width: 110px; margin-right: 8px;" />
+    <el-input-number
+      v-model="minPrice"
+      :min="0"
+      :max="computedMaxPrice"
+      placeholder="最低价"
+      style="width: 110px; margin-right: 8px;"
+    />
     <span style="margin: 0 4px;">-</span>
-    <el-input-number v-model="maxPrice" :min="minPrice || 0" placeholder="最高价"
-      style="width: 110px; margin-right: 16px;" />
+    <el-input-number
+      v-model="maxPrice"
+      :min="computedMinPrice"
+      placeholder="最高价"
+      style="width: 110px; margin-right: 16px;"
+    />
     <el-button type="primary" @click="onFilter" style="margin-left: 8px;">筛选</el-button>
     <el-button @click="onReset" style="margin-left: 4px;">重置</el-button>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, watch, defineEmits, defineProps } from 'vue'
+import { ref, watch, computed, defineEmits, defineProps } from 'vue'
 
 const props = defineProps<{
   type: string
@@ -28,6 +37,10 @@ const emit = defineEmits(['update:type', 'update:minPrice', 'update:maxPrice', '
 const type = ref(props.type)
 const minPrice = ref<number | null>(props.minPrice)
 const maxPrice = ref<number | null>(props.maxPrice)
+
+// 修正：动态计算最大/最小值，避免传递 undefined
+const computedMaxPrice = computed(() => maxPrice.value !== null ? maxPrice.value : undefined)
+const computedMinPrice = computed(() => minPrice.value !== null ? minPrice.value : 0)
 
 watch(() => props.type, v => type.value = v)
 watch(() => props.minPrice, v => minPrice.value = v)

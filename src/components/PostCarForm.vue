@@ -6,9 +6,9 @@
 
     <el-form-item label="类型">
       <el-select v-model="form.type" placeholder="请选择类型">
-        <el-option label="自行车" value="BICYCLE" />
-        <el-option label="电动车" value="ELECTRIC" />
-      </el-select>
+        <el-option label="自行车" value="BICYCLE" />
+        <el-option label="电动车" value="ELECTRIC" />
+      </el-select>
     </el-form-item>
 
     <el-form-item label="描述">
