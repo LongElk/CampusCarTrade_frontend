@@ -20,7 +20,6 @@
           <div>地点：{{ car.location }}</div>
           <div>发布时间：{{ car.publishTime }}</div>
           <div>卖家：{{ car.seller.name }} ({{ car.seller.phone }})</div>
-          <div>浏览量：{{ car.analytics.viewCount }}，收藏：{{ car.analytics.favoriteCount }}</div>
           <div class="desc">描述：{{ car.description }}</div>
           <el-button type="primary" @click="onBuy" :loading="buying" :disabled="car.status !== '在售'">购买</el-button>
         </el-col>
@@ -89,3 +88,4 @@ onMounted(fetchDetail)
   margin-top: 20px;
 }
 </style>
+

@@ -71,10 +71,6 @@ export interface CarDetail {
     url: string
     sortOrder: number
   }[]
-  analytics: {
-    viewCount: number
-    favoriteCount: number
-  }
 }
 
 // 车辆详情响应
