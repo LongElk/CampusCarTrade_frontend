@@ -93,7 +93,7 @@ export async function publishCar(params: PublishCarParams): Promise<PublishCarRe
 // 上传车辆图片，返回图片url
 export async function uploadCarImage(image: File, sortOrder: number): Promise<UploadImageResponse> {
   const formData = new FormData()
-  formData.append('image', image)
+  formData.append('file', image)
   formData.append('sortOrder', sortOrder.toString())
   const res = await api.post(`/images/upload`, formData, {
     headers: {
