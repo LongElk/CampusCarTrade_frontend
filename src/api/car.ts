@@ -53,7 +53,7 @@ export interface UploadImageResponse {
 // 车辆详情
 export interface CarDetail {
   id: number
-  seller: {
+  sellerVO: {
     id: number
     name: string
     phone: string
