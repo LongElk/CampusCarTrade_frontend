@@ -6,9 +6,9 @@
 
     <el-form-item label="类型">
       <el-select v-model="form.type" placeholder="请选择类型">
-        <el-option label="自行车" value="BICYCLE" />
-        <el-option label="电动车" value="ELECTRIC" />
-      </el-select>
+        <el-option label="自行车" value="BICYCLE" />
+        <el-option label="电动车" value="ELECTRIC" />
+      </el-select>
     </el-form-item>
 
     <el-form-item label="描述">
@@ -82,7 +82,9 @@ const submit = async () => {
     const imageUrls: string[] = []
     for (let i = 0; i < files.value.length; i++) {
       const res = await uploadCarImage(files.value[i], i)
-      if (res.code === 0 && res.data.url) {
+      console.log(res.code)
+      if (res.code === 200 && res.data.url) {
+        console.log(`Uploaded image ${i + 1}/${files.value.length}:`, res.data.url)
         imageUrls.push(res.data.url)
       }
     }

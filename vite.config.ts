@@ -28,7 +28,7 @@ export default defineConfig({
 
     viteMockServe({
       mockPath: 'mock',
-      enable: true,
+      enable: false,
       watchFiles: true,
     }),
   ],
