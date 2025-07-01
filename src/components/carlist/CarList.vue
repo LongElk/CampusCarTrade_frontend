@@ -6,11 +6,7 @@
           <img :src="car.imageUrl" alt="车辆图片" class="car-img" />
           <div class="car-info">
             <div class="car-title">{{ car.title }}</div>
-            <div>类型：{{ car.type }}</div>
             <div>价格：{{ car.price }} 元</div>
-            <div>状态：{{ car.status }}</div>
-            <div>地点：{{ car.location }}</div>
-            <div>发布时间：{{ car.publishTime }}</div>
           </div>
         </el-card>
       </el-col>
