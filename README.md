@@ -1,39 +1,56 @@
-# CampusCarTrade
+# CampusCarTrade 前端项目
 
-This template should help get you started developing with Vue 3 in Vite.
+本项目为校园二手车交易平台的前端部分，基于 Vue 3 + Vite + Element Plus 开发。
 
-## Recommended IDE Setup
+## 环境要求
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- Node.js 16+
+- Yarn 或 npm
 
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
+## 安装依赖
 
 ```sh
 yarn
+# 或
+npm install
 ```
 
-### Compile and Hot-Reload for Development
+## 本地开发启动
 
 ```sh
 yarn dev
+# 或
+npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+## 生产环境打包
 
 ```sh
 yarn build
+# 或
+npm run build
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+## 代码检查
 
 ```sh
 yarn lint
+# 或
+npm run lint
 ```
+
+## 主要功能
+
+- 用户登录、退出
+- 车辆列表浏览、筛选、分页
+- 车辆详情查看、下单
+- 车辆发布、图片上传
+- 订单管理（买家/卖家视角，删除订单）
+
+## 使用说明
+
+1. 启动后端服务并确保 API 地址与 `src/api/base.ts` 中的 `baseURL` 保持一致。
+2. 启动前端服务后，访问 [http://localhost:5173](http://localhost:5173)（默认端口）。
+3. 注册/登录后可体验全部功能。
+
+如需更多帮助，请联系项目维护者。

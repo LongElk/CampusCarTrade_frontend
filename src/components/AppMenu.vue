@@ -133,4 +133,3 @@ const onLogout = () => {
   align-items: center;
 }
 </style>
-
